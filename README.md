@@ -1,2 +1,2 @@
-# Razonamient-matem-tico
+# Razonamient-matematico
 Aprender de manera sencilla

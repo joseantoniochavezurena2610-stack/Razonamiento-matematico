@@ -1,4 +1,4 @@
-# Repaso de Razonamiento Lógico
+# Razonamiento Lógico
 
 App web para repasar razonamiento lógico: guía de métodos por tema, 20 quices de 13 preguntas con solución paso a paso y práctica libre con ejercicios generados.
 

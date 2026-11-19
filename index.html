@@ -322,6 +322,40 @@ table.hist td.n{font:600 13px var(--f-mono);text-align:right;white-space:nowrap}
 .danger-zone{margin-top:6px;text-align:right}
 @media (max-width:900px){.pk{grid-template-columns:repeat(2,1fr)}.pgrid{grid-template-columns:1fr}.dlg-grid{grid-template-columns:1fr}.qrbox{order:2}}
 @media (max-width:560px){.sharebtn span{display:none}.trow{grid-template-columns:10px 1fr 60px 84px}.trow .tbar{display:none}.days{gap:3px}}
+
+/* ===== Usuarios ===== */
+.userwrap{position:relative;flex:none}
+.userchip{display:inline-flex;align-items:center;gap:8px;font:600 14px var(--f-body);cursor:pointer;color:var(--ink);background:rgba(255,255,255,.05);border:1px solid var(--line-2);border-radius:999px;padding:4px 12px 4px 4px}
+.userchip:hover{border-color:var(--accent)}
+.userchip[hidden]{display:none}
+.av{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font:800 12px var(--f-display);color:#0a0e1a;background:linear-gradient(135deg,#38bdf8,#a78bfa)}
+.usermenu{position:absolute;right:0;top:calc(100% + 8px);width:260px;background:var(--surface);border:1px solid var(--line-2);border-radius:14px;padding:14px;box-shadow:0 20px 50px -12px rgba(0,0,0,.7);z-index:40}
+.usermenu[hidden]{display:none}
+.um-n{font:700 15px var(--f-display);margin:0}.um-m{font-size:13px;color:var(--muted);margin:2px 0 10px;word-break:break-all}
+.um-s{font-size:12.5px;color:var(--ink-2);margin:0 0 10px;padding:8px 10px;background:var(--ok-soft);border-radius:8px}
+.um-a{display:block;width:100%;text-align:left;font:600 14px var(--f-body);color:var(--ink);text-decoration:none;background:none;border:none;border-top:1px solid var(--line);padding:10px 2px;cursor:pointer}
+.um-a.out{color:var(--bad)}
+dialog.auth{max-width:420px;padding:26px}
+.auth-top{display:flex;gap:14px;align-items:center;margin-bottom:18px}
+.auth-top .mark{width:44px;height:44px;border-radius:12px;font-size:17px}
+.auth-top h2{font-size:21px;font-weight:800}.auth-top p{margin:2px 0 0;color:var(--muted);font-size:14px}
+.atabs{display:grid;grid-template-columns:1fr 1fr;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:10px;padding:3px;margin-bottom:16px}
+.atabs button{font:600 14px var(--f-body);background:none;border:none;color:var(--muted);padding:8px;border-radius:7px;cursor:pointer}
+.atabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+.gbtn{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;font:600 15px var(--f-body);background:#fff;color:#1f2937;border:none;border-radius:10px;padding:11px;cursor:pointer}
+.gbtn:hover{filter:brightness(.95)}
+.or{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12px;margin:16px 0 8px}.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+#authForm label{display:block;font:600 12px var(--f-body);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:10px 0 5px}
+#authForm input{width:100%;font:15px var(--f-body);color:var(--ink);background:var(--surface-2);border:1px solid var(--line-2);border-radius:9px;padding:10px 12px}
+#authForm input:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--accent-soft)}
+.aerr{color:var(--bad);font-size:13.5px;margin:10px 0 0;min-height:0}.aok{color:var(--ok);font-size:13.5px;margin:6px 0 0}
+.aerr:empty,.aok:empty{display:none}
+.btn.wide{width:100%;margin-top:16px;padding:11px;font-size:15px}
+.btn:disabled{opacity:.6;cursor:wait}
+.auth-foot{display:flex;justify-content:space-between;margin-top:14px}
+.link{background:none;border:none;color:var(--accent);font:500 13.5px var(--f-body);cursor:pointer;padding:4px 0}
+.link[hidden]{display:none}
+@media (max-width:560px){.userchip .un{display:none}.userchip{padding:4px}}
 </style>
 </head>
 <body>
@@ -333,6 +367,8 @@ table.hist td.n{font:600 13px var(--f-mono);text-align:right;white-space:nowrap}
     <a href="#practica" data-v="practica">Práctica libre</a>
     <a href="#progreso" data-v="progreso">Mi progreso</a>
   </nav>
+  <div class="userwrap"><button class="userchip" type="button" id="userChip" hidden aria-haspopup="menu"></button>
+  <div class="usermenu" id="userMenu" hidden role="menu"><p class="um-n" id="umName"></p><p class="um-m" id="umMail"></p><p class="um-s">Tu progreso se guarda en tu cuenta y lo ves en cualquier dispositivo.</p><a href="#progreso" class="um-a" role="menuitem">Ver mi progreso</a><button type="button" class="um-a out" id="logout" role="menuitem">Cerrar sesión</button></div></div>
   <button class="sharebtn" type="button" id="openShare" aria-haspopup="dialog"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M18 16a3 3 0 0 0-2.4 1.2l-6.7-3.4a3 3 0 0 0 0-1.6l6.7-3.4A3 3 0 1 0 15 7l-6.7 3.4a3 3 0 1 0 0 3.2L15 17a3 3 0 1 0 3-1z"/></svg><span>Compartir</span></button>
 </div></header>
 <section class="hero"><div class="wrap">
@@ -834,9 +870,27 @@ x       = 1 LCD
   </div>
   <p class="toast" id="toast" role="status" aria-live="polite"></p>
 </dialog>
+<dialog id="authDlg" class="auth" aria-labelledby="authTitle">
+  <div class="auth-top"><span class="mark">RL</span><div><h2 id="authTitle">Tu cuenta</h2><p>Guarda tu progreso y úsalo en cualquier dispositivo.</p></div></div>
+  <div class="atabs" role="tablist"><button type="button" role="tab" data-mode="in" aria-selected="true">Iniciar sesión</button><button type="button" role="tab" data-mode="up" aria-selected="false">Crear cuenta</button></div>
+  <button type="button" class="gbtn" id="gBtn"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Continuar con Google</button>
+  <div class="or"><span>o con tu correo</span></div>
+  <form id="authForm" novalidate>
+    <div id="nameRow" hidden><label for="aName">Nombre</label><input id="aName" autocomplete="name" placeholder="Juan Pérez"></div>
+    <label for="aMail">Correo</label><input id="aMail" type="email" autocomplete="email" placeholder="tucorreo@gmail.com" required>
+    <label for="aPass">Contraseña</label><input id="aPass" type="password" autocomplete="current-password" placeholder="Mínimo 6 caracteres" required>
+    <p class="aerr" id="authErr" role="alert"></p><p class="aok" id="authOk" role="status"></p>
+    <button class="btn pri wide" type="submit" id="authSubmit">Iniciar sesión</button>
+  </form>
+  <div class="auth-foot"><button type="button" class="link" id="forgot">¿Olvidaste tu contraseña?</button><button type="button" class="link" id="guestBtn">Seguir sin cuenta</button></div>
+</dialog>
 <dialog id="confirmDlg" aria-labelledby="cfTitle"><h2 id="cfTitle" style="font-size:18px">¿Borrar toda tu actividad?</h2><p style="color:var(--muted);margin:8px 0 16px">Se eliminan el historial, las notas de los quices y las estadísticas de este dispositivo. No se puede deshacer.</p><div class="btns" style="justify-content:flex-end"><button class="btn" type="button" data-close>Cancelar</button><button class="btn danger" type="button" id="cfYes">Sí, borrar</button></div></dialog>
 <footer class="foot"><div class="wrap">Basado en Intelectum Evolución, el Taller de Razonamiento Matemático y las pruebas Canguro Matemático Costarricense.</div></footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
 <script>
 /* ===== Utilidades ===== */
 function mulberry(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
@@ -1212,7 +1266,8 @@ if(typeof module!=='undefined')module.exports={G,CHAL,makeQuiz,makeRandom,buildQ
 
 (function(){
 const LET='ABCDE';
-const store={get(k){try{return JSON.parse(localStorage.getItem(k));}catch(e){return null;}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}};
+let PFX='';
+const store={get(k){try{return JSON.parse(localStorage.getItem(PFX+k));}catch(e){return null;}},set(k,v){try{localStorage.setItem(PFX+k,JSON.stringify(v));}catch(e){}if(PFX&&window.cloudSave)window.cloudSave();},del(k){try{localStorage.removeItem(PFX+k);}catch(e){}}};
 /* ---- Vistas ---- */
 const views=['guia','quices','practica','progreso'];
 function show(){const h=(location.hash||'#guia').slice(1);const v=views.includes(h)?h:'guia';
@@ -1285,7 +1340,7 @@ document.getElementById('progbox').addEventListener('click',e=>{const g=e.target
 if(g){location.hash='#guia';setTimeout(()=>{const el=document.getElementById('t-'+g.dataset.guide);if(el)el.scrollIntoView({behavior:'smooth'});},60);}
 if(p){document.getElementById('ptopic').value=p.dataset.prac;location.hash='#practica';gen();}
 if(e.target.id==='resetAll')document.getElementById('confirmDlg').showModal();});
-document.getElementById('cfYes').addEventListener('click',()=>{try{localStorage.removeItem(LOGK);localStorage.removeItem(SESK);for(let k=1;k<=20;k++)localStorage.removeItem('rl-best-'+k);}catch(e){}document.getElementById('confirmDlg').close();drawGrid();renderProgress();});
+document.getElementById('cfYes').addEventListener('click',()=>{store.del(LOGK);store.del(SESK);for(let k=1;k<=20;k++)store.del('rl-best-'+k);if(PFX&&window.cloudSave)window.cloudSave(true);document.getElementById('confirmDlg').close();drawGrid();renderProgress();});
 function summaryText(){const S=stats();const pct=S.tot?Math.round(100*S.ok/S.tot):0;const lines=['📘 Mi progreso en Razonamiento Lógico',`Preguntas: ${S.tot} (${pct} % de aciertos)`,`Quices completados: ${S.qdone}/20 · Racha: ${S.streak} días`,''];Object.entries(S.by).forEach(([k,t])=>{if(t.n)lines.push(`• ${TOPICS[k]}: ${Math.round(100*t.ok/t.n)} % (${t.ok}/${t.n}) — ${status(t)[1]}`);});lines.push('',APP_URL());return lines.join('\n');}
 /* ---- Compartir e instalar ---- */
 const QR_SVG="<svg width=\"168\" height=\"168\" version=\"1.1\" viewBox=\"0 0 39 39\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M1,1H2V2H1zM2,1H3V2H2zM3,1H4V2H3zM4,1H5V2H4zM5,1H6V2H5zM6,1H7V2H6zM7,1H8V2H7zM12,1H13V2H12zM14,1H15V2H14zM15,1H16V2H15zM16,1H17V2H16zM24,1H25V2H24zM26,1H27V2H26zM29,1H30V2H29zM31,1H32V2H31zM32,1H33V2H32zM33,1H34V2H33zM34,1H35V2H34zM35,1H36V2H35zM36,1H37V2H36zM37,1H38V2H37zM1,2H2V3H1zM7,2H8V3H7zM10,2H11V3H10zM12,2H13V3H12zM13,2H14V3H13zM15,2H16V3H15zM19,2H20V3H19zM21,2H22V3H21zM26,2H27V3H26zM27,2H28V3H27zM28,2H29V3H28zM29,2H30V3H29zM31,2H32V3H31zM37,2H38V3H37zM1,3H2V4H1zM3,3H4V4H3zM4,3H5V4H4zM5,3H6V4H5zM7,3H8V4H7zM9,3H10V4H9zM10,3H11V4H10zM11,3H12V4H11zM12,3H13V4H12zM16,3H17V4H16zM17,3H18V4H17zM19,3H20V4H19zM22,3H23V4H22zM27,3H28V4H27zM28,3H29V4H28zM29,3H30V4H29zM31,3H32V4H31zM33,3H34V4H33zM34,3H35V4H34zM35,3H36V4H35zM37,3H38V4H37zM1,4H2V5H1zM3,4H4V5H3zM4,4H5V5H4zM5,4H6V5H5zM7,4H8V5H7zM9,4H10V5H9zM12,4H13V5H12zM13,4H14V5H13zM14,4H15V5H14zM16,4H17V5H16zM17,4H18V5H17zM18,4H19V5H18zM19,4H20V5H19zM21,4H22V5H21zM23,4H24V5H23zM26,4H27V5H26zM27,4H28V5H27zM31,4H32V5H31zM33,4H34V5H33zM34,4H35V5H34zM35,4H36V5H35zM37,4H38V5H37zM1,5H2V6H1zM3,5H4V6H3zM4,5H5V6H4zM5,5H6V6H5zM7,5H8V6H7zM9,5H10V6H9zM10,5H11V6H10zM11,5H12V6H11zM12,5H13V6H12zM15,5H16V6H15zM18,5H19V6H18zM19,5H20V6H19zM20,5H21V6H20zM23,5H24V6H23zM24,5H25V6H24zM26,5H27V6H26zM29,5H30V6H29zM31,5H32V6H31zM33,5H34V6H33zM34,5H35V6H34zM35,5H36V6H35zM37,5H38V6H37zM1,6H2V7H1zM7,6H8V7H7zM9,6H10V7H9zM11,6H12V7H11zM13,6H14V7H13zM14,6H15V7H14zM15,6H16V7H15zM18,6H19V7H18zM21,6H22V7H21zM22,6H23V7H22zM23,6H24V7H23zM28,6H29V7H28zM31,6H32V7H31zM37,6H38V7H37zM1,7H2V8H1zM2,7H3V8H2zM3,7H4V8H3zM4,7H5V8H4zM5,7H6V8H5zM6,7H7V8H6zM7,7H8V8H7zM9,7H10V8H9zM11,7H12V8H11zM13,7H14V8H13zM15,7H16V8H15zM17,7H18V8H17zM19,7H20V8H19zM21,7H22V8H21zM23,7H24V8H23zM25,7H26V8H25zM27,7H28V8H27zM29,7H30V8H29zM31,7H32V8H31zM32,7H33V8H32zM33,7H34V8H33zM34,7H35V8H34zM35,7H36V8H35zM36,7H37V8H36zM37,7H38V8H37zM9,8H10V9H9zM10,8H11V9H10zM11,8H12V9H11zM12,8H13V9H12zM15,8H16V9H15zM18,8H19V9H18zM19,8H20V9H19zM22,8H23V9H22zM23,8H24V9H23zM27,8H28V9H27zM28,8H29V9H28zM29,8H30V9H29zM1,9H2V10H1zM3,9H4V10H3zM4,9H5V10H4zM5,9H6V10H5zM6,9H7V10H6zM7,9H8V10H7zM12,9H13V10H12zM14,9H15V10H14zM15,9H16V10H15zM17,9H18V10H17zM23,9H24V10H23zM25,9H26V10H25zM26,9H27V10H26zM27,9H28V10H27zM28,9H29V10H28zM31,9H32V10H31zM32,9H33V10H32zM33,9H34V10H33zM34,9H35V10H34zM35,9H36V10H35zM2,10H3V11H2zM3,10H4V11H3zM6,10H7V11H6zM9,10H10V11H9zM12,10H13V11H12zM13,10H14V11H13zM14,10H15V11H14zM15,10H16V11H15zM16,10H17V11H16zM18,10H19V11H18zM19,10H20V11H19zM21,10H22V11H21zM22,10H23V11H22zM24,10H25V11H24zM26,10H27V11H26zM29,10H30V11H29zM30,10H31V11H30zM31,10H32V11H31zM32,10H33V11H32zM34,10H35V11H34zM35,10H36V11H35zM36,10H37V11H36zM2,11H3V12H2zM3,11H4V12H3zM4,11H5V12H4zM5,11H6V12H5zM6,11H7V12H6zM7,11H8V12H7zM10,11H11V12H10zM11,11H12V12H11zM14,11H15V12H14zM16,11H17V12H16zM17,11H18V12H17zM20,11H21V12H20zM22,11H23V12H22zM23,11H24V12H23zM25,11H26V12H25zM26,11H27V12H26zM27,11H28V12H27zM28,11H29V12H28zM29,11H30V12H29zM32,11H33V12H32zM33,11H34V12H33zM34,11H35V12H34zM36,11H37V12H36zM37,11H38V12H37zM2,12H3V13H2zM3,12H4V13H3zM8,12H9V13H8zM11,12H12V13H11zM12,12H13V13H12zM16,12H17V13H16zM20,12H21V13H20zM21,12H22V13H21zM22,12H23V13H22zM23,12H24V13H23zM28,12H29V13H28zM32,12H33V13H32zM33,12H34V13H33zM37,12H38V13H37zM1,13H2V14H1zM5,13H6V14H5zM6,13H7V14H6zM7,13H8V14H7zM8,13H9V14H8zM9,13H10V14H9zM10,13H11V14H10zM12,13H13V14H12zM13,13H14V14H13zM14,13H15V14H14zM15,13H16V14H15zM16,13H17V14H16zM18,13H19V14H18zM20,13H21V14H20zM21,13H22V14H21zM23,13H24V14H23zM25,13H26V14H25zM26,13H27V14H26zM27,13H28V14H27zM28,13H29V14H28zM29,13H30V14H29zM30,13H31V14H30zM31,13H32V14H31zM33,13H34V14H33zM35,13H36V14H35zM36,13H37V14H36zM37,13H38V14H37zM2,14H3V15H2zM10,14H11V15H10zM11,14H12V15H11zM15,14H16V15H15zM17,14H18V15H17zM20,14H21V15H20zM22,14H23V15H22zM23,14H24V15H23zM24,14H25V15H24zM29,14H30V15H29zM32,14H33V15H32zM3,15H4V16H3zM4,15H5V16H4zM6,15H7V16H6zM7,15H8V16H7zM8,15H9V16H8zM10,15H11V16H10zM14,15H15V16H14zM16,15H17V16H16zM19,15H20V16H19zM22,15H23V16H22zM25,15H26V16H25zM27,15H28V16H27zM28,15H29V16H28zM31,15H32V16H31zM32,15H33V16H32zM33,15H34V16H33zM34,15H35V16H34zM36,15H37V16H36zM37,15H38V16H37zM2,16H3V17H2zM3,16H4V17H3zM4,16H5V17H4zM5,16H6V17H5zM9,16H10V17H9zM10,16H11V17H10zM11,16H12V17H11zM17,16H18V17H17zM20,16H21V17H20zM21,16H22V17H21zM22,16H23V17H22zM23,16H24V17H23zM24,16H25V17H24zM27,16H28V17H27zM29,16H30V17H29zM32,16H33V17H32zM33,16H34V17H33zM37,16H38V17H37zM3,17H4V18H3zM5,17H6V18H5zM6,17H7V18H6zM7,17H8V18H7zM9,17H10V18H9zM12,17H13V18H12zM13,17H14V18H13zM14,17H15V18H14zM15,17H16V18H15zM19,17H20V18H19zM23,17H24V18H23zM26,17H27V18H26zM27,17H28V18H27zM30,17H31V18H30zM31,17H32V18H31zM33,17H34V18H33zM35,17H36V18H35zM36,17H37V18H36zM37,17H38V18H37zM1,18H2V19H1zM2,18H3V19H2zM3,18H4V19H3zM5,18H6V19H5zM8,18H9V19H8zM9,18H10V19H9zM10,18H11V19H10zM11,18H12V19H11zM13,18H14V19H13zM14,18H15V19H14zM15,18H16V19H15zM16,18H17V19H16zM17,18H18V19H17zM22,18H23V19H22zM23,18H24V19H23zM24,18H25V19H24zM26,18H27V19H26zM29,18H30V19H29zM36,18H37V19H36zM4,19H5V20H4zM5,19H6V20H5zM6,19H7V20H6zM7,19H8V20H7zM8,19H9V20H8zM9,19H10V20H9zM11,19H12V20H11zM12,19H13V20H12zM14,19H15V20H14zM18,19H19V20H18zM19,19H20V20H19zM21,19H22V20H21zM28,19H29V20H28zM30,19H31V20H30zM32,19H33V20H32zM33,19H34V20H33zM36,19H37V20H36zM37,19H38V20H37zM1,20H2V21H1zM4,20H5V21H4zM8,20H9V21H8zM17,20H18V21H17zM20,20H21V21H20zM21,20H22V21H21zM22,20H23V21H22zM25,20H26V21H25zM27,20H28V21H27zM29,20H30V21H29zM30,20H31V21H30zM32,20H33V21H32zM33,20H34V21H33zM37,20H38V21H37zM3,21H4V22H3zM5,21H6V22H5zM6,21H7V22H6zM7,21H8V22H7zM9,21H10V22H9zM10,21H11V22H10zM11,21H12V22H11zM15,21H16V22H15zM18,21H19V22H18zM20,21H21V22H20zM21,21H22V22H21zM23,21H24V22H23zM26,21H27V22H26zM27,21H28V22H27zM30,21H31V22H30zM31,21H32V22H31zM33,21H34V22H33zM34,21H35V22H34zM35,21H36V22H35zM2,22H3V23H2zM3,22H4V23H3zM6,22H7V23H6zM8,22H9V23H8zM11,22H12V23H11zM13,22H14V23H13zM14,22H15V23H14zM18,22H19V23H18zM20,22H21V23H20zM22,22H23V23H22zM24,22H25V23H24zM26,22H27V23H26zM29,22H30V23H29zM30,22H31V23H30zM34,22H35V23H34zM36,22H37V23H36zM2,23H3V24H2zM6,23H7V24H6zM7,23H8V24H7zM8,23H9V24H8zM9,23H10V24H9zM10,23H11V24H10zM13,23H14V24H13zM14,23H15V24H14zM16,23H17V24H16zM17,23H18V24H17zM18,23H19V24H18zM22,23H23V24H22zM23,23H24V24H23zM26,23H27V24H26zM27,23H28V24H27zM28,23H29V24H28zM29,23H30V24H29zM31,23H32V24H31zM32,23H33V24H32zM33,23H34V24H33zM34,23H35V24H34zM36,23H37V24H36zM37,23H38V24H37zM1,24H2V25H1zM3,24H4V25H3zM5,24H6V25H5zM8,24H9V25H8zM9,24H10V25H9zM10,24H11V25H10zM11,24H12V25H11zM18,24H19V25H18zM19,24H20V25H19zM20,24H21V25H20zM22,24H23V25H22zM25,24H26V25H25zM28,24H29V25H28zM30,24H31V25H30zM31,24H32V25H31zM32,24H33V25H32zM33,24H34V25H33zM36,24H37V25H36zM37,24H38V25H37zM2,25H3V26H2zM6,25H7V26H6zM7,25H8V26H7zM8,25H9V26H8zM10,25H11V26H10zM13,25H14V26H13zM14,25H15V26H14zM15,25H16V26H15zM17,25H18V26H17zM23,25H24V26H23zM25,25H26V26H25zM26,25H27V26H26zM27,25H28V26H27zM28,25H29V26H28zM30,25H31V26H30zM31,25H32V26H31zM33,25H34V26H33zM35,25H36V26H35zM1,26H2V27H1zM10,26H11V27H10zM11,26H12V27H11zM12,26H13V27H12zM13,26H14V27H13zM16,26H17V27H16zM19,26H20V27H19zM20,26H21V27H20zM22,26H23V27H22zM24,26H25V27H24zM26,26H27V27H26zM27,26H28V27H27zM29,26H30V27H29zM30,26H31V27H30zM32,26H33V27H32zM34,26H35V27H34zM1,27H2V28H1zM3,27H4V28H3zM4,27H5V28H4zM6,27H7V28H6zM7,27H8V28H7zM9,27H10V28H9zM11,27H12V28H11zM12,27H13V28H12zM14,27H15V28H14zM15,27H16V28H15zM16,27H17V28H16zM17,27H18V28H17zM21,27H22V28H21zM22,27H23V28H22zM23,27H24V28H23zM26,27H27V28H26zM27,27H28V28H27zM28,27H29V28H28zM29,27H30V28H29zM31,27H32V28H31zM32,27H33V28H32zM34,27H35V28H34zM35,27H36V28H35zM36,27H37V28H36zM37,27H38V28H37zM1,28H2V29H1zM4,28H5V29H4zM5,28H6V29H5zM8,28H9V29H8zM9,28H10V29H9zM13,28H14V29H13zM16,28H17V29H16zM19,28H20V29H19zM20,28H21V29H20zM21,28H22V29H21zM22,28H23V29H22zM23,28H24V29H23zM27,28H28V29H27zM29,28H30V29H29zM30,28H31V29H30zM33,28H34V29H33zM34,28H35V29H34zM1,29H2V30H1zM3,29H4V30H3zM4,29H5V30H4zM7,29H8V30H7zM8,29H9V30H8zM9,29H10V30H9zM11,29H12V30H11zM12,29H13V30H12zM16,29H17V30H16zM18,29H19V30H18zM20,29H21V30H20zM21,29H22V30H21zM23,29H24V30H23zM24,29H25V30H24zM25,29H26V30H25zM26,29H27V30H26zM27,29H28V30H27zM29,29H30V30H29zM30,29H31V30H30zM31,29H32V30H31zM32,29H33V30H32zM33,29H34V30H33zM34,29H35V30H34zM35,29H36V30H35zM9,30H10V31H9zM10,30H11V31H10zM14,30H15V31H14zM15,30H16V31H15zM17,30H18V31H17zM19,30H20V31H19zM20,30H21V31H20zM24,30H25V31H24zM28,30H29V31H28zM29,30H30V31H29zM33,30H34V31H33zM34,30H35V31H34zM1,31H2V32H1zM2,31H3V32H2zM3,31H4V32H3zM4,31H5V32H4zM5,31H6V32H5zM6,31H7V32H6zM7,31H8V32H7zM11,31H12V32H11zM12,31H13V32H12zM15,31H16V32H15zM16,31H17V32H16zM17,31H18V32H17zM19,31H20V32H19zM21,31H22V32H21zM22,31H23V32H22zM25,31H26V32H25zM27,31H28V32H27zM29,31H30V32H29zM31,31H32V32H31zM33,31H34V32H33zM35,31H36V32H35zM36,31H37V32H36zM37,31H38V32H37zM1,32H2V33H1zM7,32H8V33H7zM9,32H10V33H9zM11,32H12V33H11zM22,32H23V33H22zM23,32H24V33H23zM25,32H26V33H25zM29,32H30V33H29zM33,32H34V33H33zM34,32H35V33H34zM36,32H37V33H36zM1,33H2V34H1zM3,33H4V34H3zM4,33H5V34H4zM5,33H6V34H5zM7,33H8V34H7zM9,33H10V34H9zM13,33H14V34H13zM15,33H16V34H15zM16,33H17V34H16zM19,33H20V34H19zM23,33H24V34H23zM24,33H25V34H24zM25,33H26V34H25zM26,33H27V34H26zM28,33H29V34H28zM29,33H30V34H29zM30,33H31V34H30zM31,33H32V34H31zM32,33H33V34H32zM33,33H34V34H33zM35,33H36V34H35zM36,33H37V34H36zM37,33H38V34H37zM1,34H2V35H1zM3,34H4V35H3zM4,34H5V35H4zM5,34H6V35H5zM7,34H8V35H7zM9,34H10V35H9zM10,34H11V35H10zM13,34H14V35H13zM16,34H17V35H16zM17,34H18V35H17zM20,34H21V35H20zM21,34H22V35H21zM24,34H25V35H24zM30,34H31V35H30zM31,34H32V35H31zM33,34H34V35H33zM35,34H36V35H35zM37,34H38V35H37zM1,35H2V36H1zM3,35H4V36H3zM4,35H5V36H4zM5,35H6V36H5zM7,35H8V36H7zM9,35H10V36H9zM11,35H12V36H11zM13,35H14V36H13zM19,35H20V36H19zM21,35H22V36H21zM23,35H24V36H23zM26,35H27V36H26zM34,35H35V36H34zM35,35H36V36H35zM36,35H37V36H36zM37,35H38V36H37zM1,36H2V37H1zM7,36H8V37H7zM10,36H11V37H10zM11,36H12V37H11zM12,36H13V37H12zM13,36H14V37H13zM17,36H18V37H17zM20,36H21V37H20zM22,36H23V37H22zM27,36H28V37H27zM28,36H29V37H28zM29,36H30V37H29zM33,36H34V37H33zM37,36H38V37H37zM1,37H2V38H1zM2,37H3V38H2zM3,37H4V38H3zM4,37H5V38H4zM5,37H6V38H5zM6,37H7V38H6zM7,37H8V38H7zM9,37H10V38H9zM11,37H12V38H11zM12,37H13V38H12zM13,37H14V38H13zM18,37H19V38H18zM23,37H24V38H23zM24,37H25V38H24zM25,37H26V38H25zM26,37H27V38H26zM27,37H28V38H27zM33,37H34V38H33zM34,37H35V38H34zM35,37H36V38H35zM36,37H37V38H36zM37,37H38V38H37z\" id=\"qr-path\" fill=\"#000000\" fill-opacity=\"1\" fill-rule=\"nonzero\" stroke=\"none\"/></svg>";
@@ -1318,6 +1373,46 @@ function drawGrid(){grid.innerHTML=[...Array(20)].map((_,k)=>{const n=k+1,b=stor
 function openQuiz(n){cur=n;drawGrid();renderQuiz(qbox,makeQuiz(n),{title:'Quiz '+n,key:'rl-best-'+n,onScore:drawGrid});}
 grid.addEventListener('click',e=>{const b=e.target.closest('.qbtn');if(!b)return;openQuiz(+b.dataset.n);qbox.scrollIntoView({behavior:'smooth',block:'start'});});
 openQuiz(1);
+
+/* ---- Usuarios (Firebase) ---- */
+(function(){
+const cfg=window.FIREBASE_CONFIG;const ready=!!(window.firebase&&cfg&&cfg.apiKey&&!/PEGA/.test(cfg.apiKey));
+const chip=document.getElementById('userChip'),menu=document.getElementById('userMenu'),dlg=document.getElementById('authDlg');
+if(!ready){chip.hidden=true;return;}
+firebase.initializeApp(cfg);const auth=firebase.auth(),db=firebase.firestore();
+let user=null,saveT=null;
+const collect=pfx=>{const g=k=>{try{return JSON.parse(localStorage.getItem(pfx+k));}catch(e){return null;}};const best={};for(let k=1;k<=20;k++){const b=g('rl-best-'+k);if(b!==null&&b!==undefined)best[k]=b;}return{best,log:g(LOGK)||[],sessions:g(SESK)||[]};};
+const writeLocal=(pfx,d)=>{try{for(let k=1;k<=20;k++){if(d.best[k]!==undefined)localStorage.setItem(pfx+'rl-best-'+k,JSON.stringify(d.best[k]));else localStorage.removeItem(pfx+'rl-best-'+k);}localStorage.setItem(pfx+LOGK,JSON.stringify(d.log));localStorage.setItem(pfx+SESK,JSON.stringify(d.sessions));}catch(e){}};
+const clearLocal=pfx=>{try{for(let k=1;k<=20;k++)localStorage.removeItem(pfx+'rl-best-'+k);localStorage.removeItem(pfx+LOGK);localStorage.removeItem(pfx+SESK);}catch(e){}};
+function merge(...ds){const best={},L=new Map(),S=new Map();ds.forEach(d=>{if(!d)return;Object.entries(d.best||{}).forEach(([k,v])=>{best[k]=Math.max(best[k]??-1,v);});(d.log||[]).forEach(x=>L.set(x.d+'|'+x.tp+'|'+x.ok,x));(d.sessions||[]).forEach(x=>S.set(x.d+'|'+x.title,x));});
+return{best,log:[...L.values()].sort((a,b)=>a.d-b.d).slice(-3000),sessions:[...S.values()].sort((a,b)=>a.d-b.d).slice(-300)};}
+window.cloudSave=function(now){if(!user)return;clearTimeout(saveT);const go=()=>{const d=collect(PFX);db.collection('users').doc(user.uid).set({name:user.displayName||'',email:user.email||'',best:d.best,log:d.log.slice(-3000),sessions:d.sessions.slice(-300),updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(e=>console.warn('No se pudo guardar en la nube',e));};if(now)go();else saveT=setTimeout(go,1500);};
+function refresh(){drawGrid();if(document.getElementById('v-progreso').classList.contains('on'))renderProgress();}
+const initials=n=>(n||'?').trim().split(/\s+/).slice(0,2).map(w=>w[0]).join('').toUpperCase();
+function paintChip(){chip.hidden=false;if(user){const n=user.displayName||user.email.split('@')[0];chip.innerHTML=`<span class="av">${initials(n)}</span><span class="un">${n.split(' ')[0]}</span>`;chip.setAttribute('aria-label','Cuenta de '+n);document.getElementById('umName').textContent=n;document.getElementById('umMail').textContent=user.email||'';}else{chip.innerHTML='<span class="av">?</span><span class="un">Entrar</span>';chip.setAttribute('aria-label','Iniciar sesión');}}
+auth.onAuthStateChanged(async u=>{user=u;menu.hidden=true;
+if(u){PFX='u:'+u.uid+':';let cloud=null;try{const doc=await db.collection('users').doc(u.uid).get();cloud=doc.exists?doc.data():null;}catch(e){console.warn(e);}
+const guest=collect('');const hadGuest=guest.log.length||guest.sessions.length||Object.keys(guest.best).length;const m=merge(collect(PFX),cloud,guest);writeLocal(PFX,m);if(hadGuest)clearLocal('');window.cloudSave(true);if(dlg.open)dlg.close();}
+else{PFX='';let skip=false;try{skip=localStorage.getItem('rl-guest-ok')==='1';}catch(e){}if(!skip&&!dlg.open)openAuth('in');}
+paintChip();refresh();});
+/* diálogo */
+const f=document.getElementById('authForm'),err=document.getElementById('authErr');let mode='in';
+function setMode(m){mode=m;dlg.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-selected',b.dataset.mode===m?'true':'false'));document.getElementById('nameRow').hidden=m!=='up';document.getElementById('authSubmit').textContent=m==='up'?'Crear cuenta':'Iniciar sesión';document.getElementById('forgot').hidden=m==='up';document.getElementById('aPass').autocomplete=m==='up'?'new-password':'current-password';err.textContent='';}
+function openAuth(m){setMode(m||'in');dlg.showModal();}
+dlg.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
+const ERR={'auth/invalid-email':'El correo no es válido.','auth/missing-password':'Escribe la contraseña.','auth/weak-password':'La contraseña debe tener al menos 6 caracteres.','auth/email-already-in-use':'Ya existe una cuenta con ese correo. Inicia sesión.','auth/invalid-credential':'Correo o contraseña incorrectos.','auth/wrong-password':'Correo o contraseña incorrectos.','auth/user-not-found':'No hay ninguna cuenta con ese correo.','auth/too-many-requests':'Demasiados intentos. Espera un momento.','auth/network-request-failed':'Sin conexión a internet.','auth/popup-closed-by-user':'Cerraste la ventana de Google antes de terminar.','auth/unauthorized-domain':'Este dominio no está autorizado en Firebase.'};
+const msg=e=>ERR[e.code]||('No se pudo completar: '+(e.code||e.message));
+f.addEventListener('submit',async e=>{e.preventDefault();err.textContent='';const em=document.getElementById('aMail').value.trim(),pw=document.getElementById('aPass').value,btn=document.getElementById('authSubmit');btn.disabled=true;
+try{if(mode==='up'){const nm=document.getElementById('aName').value.trim();if(!nm){err.textContent='Escribe tu nombre.';btn.disabled=false;return;}const c=await auth.createUserWithEmailAndPassword(em,pw);await c.user.updateProfile({displayName:nm});user=auth.currentUser;paintChip();window.cloudSave(true);}else{await auth.signInWithEmailAndPassword(em,pw);}}catch(x){err.textContent=msg(x);}btn.disabled=false;});
+document.getElementById('gBtn').addEventListener('click',async()=>{err.textContent='';const p=new firebase.auth.GoogleAuthProvider();try{await auth.signInWithPopup(p);}catch(x){if(x.code==='auth/popup-blocked'||x.code==='auth/operation-not-supported-in-this-environment'){await auth.signInWithRedirect(p);}else err.textContent=msg(x);}});
+document.getElementById('forgot').addEventListener('click',async()=>{const em=document.getElementById('aMail').value.trim();if(!em){err.textContent='Escribe tu correo arriba y vuelve a tocar “¿Olvidaste tu contraseña?”.';return;}try{await auth.sendPasswordResetEmail(em);err.textContent='';document.getElementById('authOk').textContent='Te enviamos un correo para cambiar la contraseña.';}catch(x){err.textContent=msg(x);}});
+document.getElementById('guestBtn').addEventListener('click',()=>{try{localStorage.setItem('rl-guest-ok','1');}catch(e){}dlg.close();});
+chip.addEventListener('click',()=>{if(!user){openAuth('in');return;}menu.hidden=!menu.hidden;});
+document.addEventListener('click',e=>{if(!menu.hidden&&!e.target.closest('#userMenu')&&!e.target.closest('#userChip'))menu.hidden=true;});
+menu.addEventListener('click',e=>{if(e.target.closest('a'))menu.hidden=true;});
+document.getElementById('logout').addEventListener('click',async()=>{window.cloudSave(true);await auth.signOut();try{localStorage.setItem('rl-guest-ok','1');}catch(e){}});
+})();
+
 /* ---- Práctica ---- */
 const sel=document.getElementById('ptopic');Object.entries(TOPICS).forEach(([k,v])=>{const o=document.createElement('option');o.value=k;o.textContent=v;sel.appendChild(o);});
 const pbox=document.getElementById('practbox');

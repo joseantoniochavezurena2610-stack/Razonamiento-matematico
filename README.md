@@ -5,3 +5,5 @@ App web para repasar razonamiento lógico: guía de métodos por tema, 20 quices
 Temas: planteo de ecuaciones, edades, cuatro operaciones, cortes y estacas, criptoaritmética, operadores, fracciones, sucesiones, combinatoria, probabilidades y lógica tipo Canguro.
 
 Funciona sin conexión y se puede instalar en el celular o la compu ("Agregar a pantalla de inicio" / "Instalar app").
+
+Link de la app web : https://joseantoniochavezurena2610-stack.github.io/Razonamient-matematico/

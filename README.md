@@ -6,4 +6,4 @@ Temas: planteo de ecuaciones, edades, cuatro operaciones, cortes y estacas, crip
 
 Funciona sin conexión y se puede instalar en el celular o la compu ("Agregar a pantalla de inicio" / "Instalar app").
 
-Link de la app web : 
+Link de la app web : https://joseantoniochavezurena2610-stack.github.io/Razonamiento-matematico/
